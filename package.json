@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "A NodeJS  Wallet API for Cryptonite simplewallet JSON RPC",
   "main": "./lib/CryptoniteWallet.js",
-  "types": "./typings/TypedMVC.d.ts",
+  "types": "./typings/CryptoniteWallet.d.ts",
   "scripts": {
     "build": "rm -rf lib && rm -rf typings && tsc",
     "postinstall": "npm run build"
