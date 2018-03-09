@@ -1,6 +1,6 @@
 {
   "name": "mammonite",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A NodeJS  Wallet API for Cryptonite simplewallet JSON RPC",
   "main": "./lib/CryptoniteWallet.js",
   "types": "./typings/TypedMVC.d.ts",
