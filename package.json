@@ -1,0 +1,29 @@
+{
+  "name": "mammonite",
+  "version": "0.0.1",
+  "description": "A NodeJS  Wallet API for Cryptonite simplewallet JSON RPC",
+  "main": "./lib/CryptoniteWallet.js",
+  "types": "./typings/TypedMVC.d.ts",
+  "scripts": {
+    "build": "rm -rf lib && rm -rf typings && tsc",
+    "postinstall": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mercurial/Mammonite.git"
+  },
+  "author": "Clark Alesna <clark_alesna@hotmail.com> (http://github.com/mercurial)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mercurial/Mammonite/issues"
+  },
+  "homepage": "https://github.com/Mercurial/Mammonite#readme",
+  "dependencies": {
+    "node-fetch": "^2.1.1",
+    "tslib": "^1.9.0",
+    "typescript": "^2.7.2"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^1.6.7"
+  }
+}
