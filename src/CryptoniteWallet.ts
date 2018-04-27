@@ -1,5 +1,6 @@
 import { IWalletBalance } from "./Interfaces/IWalletBalance";
 import fetch from 'node-fetch';
+import { IWalletTransaction } from "./Interfaces/IWalletTransaction";
 
 export class CryptoniteWallet
 {
@@ -41,6 +42,25 @@ export class CryptoniteWallet
         return result && result.result && result.result.tx_hash;
     }
 
+    GetTransfers = async() : Promise<IWalletTransaction[]> =>
+    {
+        let result = (await this._RPC("get_transfers")).result;
+        let transfers = new Array<IWalletTransaction>();
+        (<Array<any>>result.transfers).forEach(transfer => {
+            transfers.push({
+                Address: transfer.address,
+                Amount: transfer.amount,
+                BlockIndex: transfer.blockIndex,
+                Fee: transfer.fee,
+                Outgoing: transfer.output,
+                PaymentID: transfer.paymentId,
+                SendTime: transfer.time,
+                TransactionHash: transfer.transactionHash
+            });
+        });
+        return transfers;
+    }
+
     isIPBCAddressValid = async(address: string) : Promise<boolean> =>
     {
         let pattern = new RegExp(/b[0123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{96}$/g);
@@ -68,6 +88,7 @@ export class CryptoniteWallet
         });
 
         let resultJson = await result.json();
+        console.log("result", resultJson);
         return resultJson;
     }
 }

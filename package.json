@@ -1,9 +1,9 @@
 {
   "name": "mammonite",
-  "version": "0.0.2",
+  "version": "0.0.7",
   "description": "A NodeJS  Wallet API for Cryptonite simplewallet JSON RPC",
-  "main": "./lib/CryptoniteWallet.js",
-  "types": "./typings/CryptoniteWallet.d.ts",
+  "main": "./lib/src/CryptoniteWallet.js",
+  "types": "./typings/src/CryptoniteWallet.d.ts",
   "scripts": {
     "build": "rm -rf lib && rm -rf typings && tsc",
     "postinstall": "npm run build"
@@ -19,11 +19,9 @@
   },
   "homepage": "https://github.com/Mercurial/Mammonite#readme",
   "dependencies": {
+    "@types/node-fetch": "^1.6.7",
     "node-fetch": "^2.1.1",
     "tslib": "^1.9.0",
     "typescript": "^2.7.2"
-  },
-  "devDependencies": {
-    "@types/node-fetch": "^1.6.7"
   }
 }
