@@ -25,13 +25,13 @@ export class CryptoniteWallet
         };
     }
 
-    Transfer = async (amount: number, address: string, mixin?: number, fee?: number): Promise<boolean | string> =>
+    Transfer = async (amount: number, address: string, mixin?: number, fee?: number, paymentId? : string): Promise<boolean | string> =>
     {
         let payload = {
             "destinations": [{amount: (amount * this.CoinUnits) as number, address: address }],
             "mixin": mixin ? mixin : 4,
             "get_tx_key": true,
-            "fee": fee ? fee : this.Fee,
+            "fee": fee ? fee * this.CoinUnits : this.Fee,
             "unlock_time": 3
         };
         let result = await this._RPC("transfer", payload);
@@ -78,7 +78,7 @@ export class CryptoniteWallet
 
         if(params)
             body.params = params;
-
+        
         let result = await fetch(`http://${this.Host}:${this.Port}/json_rpc`, {
             method: 'post',
             headers: {
@@ -88,7 +88,6 @@ export class CryptoniteWallet
         });
 
         let resultJson = await result.json();
-        console.log("result", resultJson);
         return resultJson;
     }
 }
