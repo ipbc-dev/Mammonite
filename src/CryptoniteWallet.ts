@@ -25,13 +25,13 @@ export class CryptoniteWallet
         };
     }
 
-    Transfer = async (amount: number, address: string): Promise<boolean | string> =>
+    Transfer = async (amount: number, address: string, mixin?: number, fee?: number): Promise<boolean | string> =>
     {
         let payload = {
             "destinations": [{amount: (amount * this.CoinUnits) as number, address: address }],
-            "mixin":4,
+            "mixin": mixin ? mixin : 4,
             "get_tx_key": true,
-            "fee": this.Fee,
+            "fee": fee ? fee : this.Fee,
             "unlock_time": 3
         };
         let result = await this._RPC("transfer", payload);
