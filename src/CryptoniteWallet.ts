@@ -49,9 +49,9 @@ export class CryptoniteWallet
         (<Array<any>>result.transfers).forEach(transfer => {
             transfers.push({
                 Address: transfer.address,
-                Amount: transfer.amount,
+                Amount: transfer.amount / this.CoinUnits,
                 BlockIndex: transfer.blockIndex,
-                Fee: transfer.fee,
+                Fee: transfer.fee / this.CoinUnits,
                 Outgoing: transfer.output,
                 PaymentID: transfer.paymentId,
                 SendTime: transfer.time,
