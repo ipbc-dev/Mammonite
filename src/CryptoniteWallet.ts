@@ -1,6 +1,7 @@
 import { IWalletBalance } from "./Interfaces/IWalletBalance";
 import fetch from 'node-fetch';
 import { IWalletTransaction } from "./Interfaces/IWalletTransaction";
+import { IWalletTransferResult } from './Interfaces/IWalletTransferResult';
 
 export class CryptoniteWallet
 {
@@ -25,7 +26,7 @@ export class CryptoniteWallet
         };
     }
 
-    Transfer = async (amount: number, address: string, mixin?: number, fee?: number, paymentId? : string): Promise<boolean> =>
+    Transfer = async (amount: number, address: string, mixin?: number, fee?: number, paymentId? : string): Promise<IWalletTransferResult> =>
     {
         let payload = {
             "destinations": [{amount: (amount * this.CoinUnits) as number, address: address }],
@@ -38,9 +39,19 @@ export class CryptoniteWallet
         let result = await this._RPC("transfer", payload);
         
         if(result.error)
-            return false;
+            return <IWalletTransferResult>
+            {
+                Success: false,
+                Message: result.error,
+                TransactionHash: null
+            };
         else
-            return true;
+            return <IWalletTransferResult>
+            {
+                Success: true,
+                Message: "Transaction Complete",
+                TransactionHash: result.result.tx_hash
+            };
     }
 
     GetTransfers = async() : Promise<IWalletTransaction[]> =>
