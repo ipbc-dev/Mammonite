@@ -42,7 +42,7 @@ export class CryptoniteWallet
             return <IWalletTransferResult>
             {
                 Success: false,
-                Message: result.error,
+                Message: result.error.Message,
                 TransactionHash: null
             };
         else
