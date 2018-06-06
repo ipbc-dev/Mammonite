@@ -1,5 +1,5 @@
 # Mammonite
-A NodeJS  Wallet API for Cryptonite simplewallet JSON RPC
+A Javascript/Typescript API for Cryptonite simplewallet JSON RPC
 
 
 WARNING:
