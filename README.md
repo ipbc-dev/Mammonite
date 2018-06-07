@@ -1,7 +1,7 @@
 # Mammonite
-A NodeJS  Wallet API for Cryptonite simplewallet JSON RPC
+A Javascript/Typescript API for Cryptonite simplewallet JSON RPC
 
 
 WARNING:
 
-ALPHA VERSION ONLY SUPPORTS AND TESTED ON IPBC WALLET
+ALPHA VERSION ONLY SUPPORTS AND TESTED ON BIT.TUBE SIMPLEWWALLET RPC
