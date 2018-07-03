@@ -91,7 +91,7 @@ export class CryptoniteWallet
             (<Array<any>>result.out).forEach(transfer => {
                 // console.log("out", transfer.fee / this.CoinUnits);
                 transfers.push({
-                    Address: transfer.address,
+                    Address: transfer.destinations && transfer.destinations.length > 0 ? transfer.destinations[0].address : transfer.address,
                     Amount: transfer.amount / this.CoinUnits,
                     BlockIndex: transfer.height,
                     Fee: transfer.fee / this.CoinUnits,
