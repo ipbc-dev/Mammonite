@@ -7,7 +7,8 @@ interface IWalletTransaction
     Outgoing: boolean,
     PaymentID: string,
     SendTime: number,
-    TransactionHash: string
+    TransactionHash: string,
+    Pending: boolean
 }
 
 export  { IWalletTransaction }

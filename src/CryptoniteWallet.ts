@@ -62,20 +62,63 @@ export class CryptoniteWallet
 
     GetTransfers = async() : Promise<IWalletTransaction[]> =>
     {
-        let result = (await this._RPC("get_transfers")).result;
+        let result = (await this._RPC("get_transfers", {
+            in: true,
+            out: true,
+            pending: true
+        })).result;
         let transfers = new Array<IWalletTransaction>();
-        (<Array<any>>result.transfers).forEach(transfer => {
-            transfers.push({
-                Address: transfer.address,
-                Amount: transfer.amount / this.CoinUnits,
-                BlockIndex: transfer.blockIndex,
-                Fee: transfer.fee / this.CoinUnits,
-                Outgoing: transfer.output,
-                PaymentID: transfer.paymentId,
-                SendTime: transfer.time,
-                TransactionHash: transfer.transactionHash
+
+        
+        if(result.in)
+            (<Array<any>>result.in).forEach(transfer => {
+                // console.log("in", transfer.fee / this.CoinUnits);
+                transfers.push({
+                    Address: transfer.address,
+                    Amount: transfer.amount / this.CoinUnits,
+                    BlockIndex: transfer.height,
+                    //Fee: transfer.fee / this.CoinUnits,
+                    Fee: -1,
+                    Outgoing: false,
+                    PaymentID: transfer.payment_id,
+                    SendTime: transfer.timestamp,
+                    TransactionHash: transfer.txid,
+                    Pending: false
+                });
             });
-        });
+
+        if(result.out)
+            (<Array<any>>result.out).forEach(transfer => {
+                // console.log("out", transfer.fee / this.CoinUnits);
+                transfers.push({
+                    Address: transfer.address,
+                    Amount: transfer.amount / this.CoinUnits,
+                    BlockIndex: transfer.height,
+                    Fee: transfer.fee / this.CoinUnits,
+                    Outgoing: true,
+                    PaymentID: transfer.payment_id,
+                    SendTime: transfer.timestamp,
+                    TransactionHash: transfer.txid,
+                    Pending: false
+                });
+            });
+
+        if(result.pending)
+            (<Array<any>>result.pending).forEach(transfer => {
+                // console.log("pending", transfer.fee / this.CoinUnits);
+                transfers.push({
+                    Address: transfer.address,
+                    Amount: transfer.amount / this.CoinUnits,
+                    BlockIndex: transfer.height,
+                    Fee: transfer.fee / this.CoinUnits,
+                    Outgoing: true,
+                    PaymentID: transfer.payment_id,
+                    SendTime: transfer.timestamp,
+                    TransactionHash: transfer.txid,
+                    Pending: true
+                });
+            });
+
         return transfers;
     }
 
