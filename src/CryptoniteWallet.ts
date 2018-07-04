@@ -63,9 +63,9 @@ export class CryptoniteWallet
 
     GetKeys = async() : Promise<IWalletKey> =>
     {
-        let result = (await this._RPC("query_key"), <any>{ key_type: "view_key" }).result;
+        let result = (await this._RPC("query_key",{ key_type: "view_key" })).result;
         let view_key = result.key;
-        result = (await this._RPC("query_key"), <any>{ key_type: "spend_key" }).result;
+        result = (await this._RPC("query_key", <any>{ key_type: "spend_key" })).result;
         let spend_key = result.key;
         return <IWalletKey>
         {
