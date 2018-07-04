@@ -2,6 +2,7 @@ import { IWalletBalance } from "./Interfaces/IWalletBalance";
 import fetch from 'node-fetch';
 import { IWalletTransaction } from "./Interfaces/IWalletTransaction";
 import { IWalletTransferResult } from './Interfaces/IWalletTransferResult';
+import { IWalletKey } from './Interfaces/IWalletKey';
 
 export class CryptoniteWallet
 {
@@ -58,6 +59,19 @@ export class CryptoniteWallet
     {
         let result = (await this._RPC("get_height")).result;
         return result.height;
+    }
+
+    GetKeys = async() : Promise<IWalletKey> =>
+    {
+        let result = (await this._RPC("query_key"), <any>{ key_type: "view_key" }).result;
+        let view_key = result.key;
+        result = (await this._RPC("query_key"), <any>{ key_type: "spend_key" }).result;
+        let spend_key = result.key;
+        return <IWalletKey>
+        {
+            ViewKey: view_key,
+            SpendKey: spend_key
+        };
     }
 
     GetTransfers = async() : Promise<IWalletTransaction[]> =>
