@@ -34,7 +34,6 @@ export class CryptoniteWallet
             "mixin": mixin ? mixin : 4,
             "get_tx_key": true,
             "fee": fee ? fee * this.CoinUnits : this.Fee,
-            "unlock_time": 3,
             'payment_id': paymentId ? paymentId : ''
         };
         let result = await this._RPC("transfer", payload);
