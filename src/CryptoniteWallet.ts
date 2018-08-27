@@ -54,6 +54,12 @@ export class CryptoniteWallet
             };
     }
 
+    Store = async() : Promise<boolean> =>
+    {
+        let result = (await this._RPC("store")).result;
+        return true;
+    }
+
     GetHeight = async() : Promise<number> =>
     {
         let result = (await this._RPC("get_height")).result;
